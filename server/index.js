@@ -28,8 +28,15 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-mongoose.connect("mongodb://localhost:27017/Chat_Data")
-console.log("mongoose is connected")
+// mongoose.connect("mongodb://localhost:27017/Chat_Data")
+// console.log("mongoose is connected")
+
+const connectDb = async()=>{
+    await mongoose.connect(`mongodb+srv://laxmiray013:3yxARaz2KZWkS92M@cluster0.4ltnxpb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`);
+    console.log(`this db is connected with ${mongoose.connection.host}`)
+  }
+  
+  connectDb();
 
 
 app.post("/run", async (req, res) => {
