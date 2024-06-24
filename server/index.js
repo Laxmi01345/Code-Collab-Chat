@@ -18,12 +18,12 @@ const Chats = require('./Model/Schema');
 const PORT = 3000; 
 
 const app = express();
-app.use(express.static(path.join(__dirname, '..', 'client', 'dist')));
-
-// Handle all other routes by serving the index.html file
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'client', 'dist', 'index.html'));
+    app.use(express.static(path.join(__dirname, '..', 'dist')));
+    app.get('*', (req, res) => {
+       res.sendFile(path.join(__dirname, '..', 'dist', 'index.html'));
 });
+
+
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -101,9 +101,13 @@ io.on('connection',async (socket) => {
         const room = await Chats.findOne({ roomId: RoomId});
         if (room) {
 
-            console.log(Username)
-            socket.emit("chatHistory", room.messages,senderSocketId,Username);
-
+           
+            const messagesWithUsername = room.messages.map((msg) => ({
+                msg: msg.msg,
+                socketId: msg.socketId,
+                username: msg.username 
+            }));
+            socket.emit("chatHistory", messagesWithUsername, senderSocketId);
             
            
         }
@@ -130,7 +134,7 @@ io.on('connection',async (socket) => {
 
             const updatedRoom = await Chats.findOneAndUpdate(
                 { roomId: RoomId },
-                { $push: { messages: { msg: message, socketId: senderSocketId } } },
+                { $push: { messages: { msg: message, socketId: senderSocketId, username } } },
                 { new: true, upsert: true }
             );
 
@@ -140,7 +144,7 @@ io.on('connection',async (socket) => {
 
             clients.forEach(({ socketId }) => {
                 if (socketId !== senderSocketId) {
-                    io.to(socketId).emit('messageSent', { message ,username});
+                    io.to(socketId).emit('messageSent', { message ,username });
 
                    
                 }

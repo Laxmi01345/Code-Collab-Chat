@@ -35,11 +35,11 @@ export const Chatbtn = () => {
 
       const socket = socketRef.current;
       
-      socket.on('chatHistory', (messages, senderSocketId,username) => {
-        console.log(`Chat history received:`, messages);
+      socket.on('chatHistory', (messagesWithUsername, senderSocketId) => {
         
-        const mergedMessages = messages.map((msgObj) => {
-          const { msg, socketId } = msgObj;
+        
+        const mergedMessages = messagesWithUsername.map((msgObj) => {
+          const { msg, socketId ,username} = msgObj;
           console.log("msg :", msg);
           console.log("socketId :", socketId, " !!", senderSocketId)
           const type = socketId === senderSocketId ? "sent" : "received";
@@ -55,7 +55,7 @@ export const Chatbtn = () => {
         
         setMergeMsg((prevMergeMsg) => [
           ...prevMergeMsg,
-          {  message,username , type: "received" },
+          {  message , type: "received" ,username},
         ]);
       };
 

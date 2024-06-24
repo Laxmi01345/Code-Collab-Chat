@@ -4,14 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-  "dev": "concurrently \"npm run dev:client\" \"npm run dev:server\"",
-  "dev:client": "vite",
-  "dev:server": "nodemon server/index.js",
-  "build": "vite build",
-  "start": "npm run build && npm run start:server",
-  "start:server": "node server/index.js",
-  "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-  "preview": "vite preview"
+  "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
 },
   "dependencies": {
     "@monaco-editor/react": "^4.6.0",
