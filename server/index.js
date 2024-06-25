@@ -21,14 +21,10 @@ const app = express();
 const __dirname1 = path.resolve();
 const PORT = process.env.PORT || 3000;
 
-
 if (process.env.NODE_ENV === "production") {
-    // Serve static files from the 'client/dist' directory
-    app.use(express.static(path.join(__dirname, '..', 'client', 'dist')));
-    
-    // Serve index.html for all routes
+    app.use(express.static(path.join(__dirname1, 'client', 'dist')));
     app.get('*', (req, res) => {
-        res.sendFile(path.join(__dirname, '..', 'client', 'dist', 'index.html'));
+        res.sendFile(path.resolve(__dirname1, 'client', 'dist', 'index.html'));
     });
 } else {
     app.get('/', (req, res) => {
