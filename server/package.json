@@ -6,9 +6,9 @@
   "scripts": {
     "type": "module",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node index.js",
-    "build": "npm install",
-    "start": "node index.js"
+    
+    "start": "node index.js",
+    "build": "npm install"
   },
   "author": "",
   "license": "ISC",
