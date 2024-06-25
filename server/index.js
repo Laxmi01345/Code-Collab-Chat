@@ -16,19 +16,25 @@ const { Executec } = require('./Executec');
 const { Executejava } = require('./Executejava');
 const Chats = require('./Model/Schema');
 
-const PORT = process.env.PORT 
-
 const app = express();
 
-const distPath = path.join(__dirname, '..', 'client', 'dist');
+const __dirname1 = path.resolve();
+const PORT = process.env.PORT || 3000;
 
-console.log('Static files path:', distPath);
-console.log('Index file path:', path.join(distPath, 'index.html'));
 
-app.use(express.static(distPath));
-app.get('*', (req, res) => {
-    res.sendFile(path.join(distPath, 'index.html'));
-});
+if (process.env.NODE_ENV === "production") {
+    // Serve static files from the 'client/dist' directory
+    app.use(express.static(path.join(__dirname, '..', 'client', 'dist')));
+    
+    // Serve index.html for all routes
+    app.get('*', (req, res) => {
+        res.sendFile(path.join(__dirname, '..', 'client', 'dist', 'index.html'));
+    });
+} else {
+    app.get('/', (req, res) => {
+        res.send("API is running successfully");
+    });
+}
 
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
