@@ -9,7 +9,7 @@
     
     "start": "node index.js",
   
-    "build": "npm install"
+    "build": "npm install && client/build"
   },
   "author": "",
   "license": "ISC",
