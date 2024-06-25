@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+require('dotenv').config();
 const http = require('http');
 const path = require('path');
 const Code =require('./Model/Code')
@@ -15,14 +16,19 @@ const { Executec } = require('./Executec');
 const { Executejava } = require('./Executejava');
 const Chats = require('./Model/Schema');
 
-const PORT = 3000; 
+const PORT = process.env.PORT 
 
 const app = express();
-    app.use(express.static(path.join(__dirname, '.', 'client', 'dist')));
-    app.get('*', (req, res) => {
-        res.sendFile(path.join(__dirname, '.', 'client', 'dist', 'index.html'));
-    });
 
+const distPath = path.join(__dirname, '..', 'client', 'dist');
+
+console.log('Static files path:', distPath);
+console.log('Index file path:', path.join(distPath, 'index.html'));
+
+app.use(express.static(distPath));
+app.get('*', (req, res) => {
+    res.sendFile(path.join(distPath, 'index.html'));
+});
 
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
@@ -32,7 +38,7 @@ app.use(express.json());
 // console.log("mongoose is connected")
 
 const connectDb = async()=>{
-    await mongoose.connect(`mongodb+srv://laxmiray013:3yxARaz2KZWkS92M@cluster0.4ltnxpb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`);
+    await mongoose.connect(process.env.MONGO_URL);
     console.log(`this db is connected with ${mongoose.connection.host}`)
   }
   
