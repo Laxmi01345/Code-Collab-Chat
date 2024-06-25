@@ -16,7 +16,7 @@ const { Executec } = require('./Executec');
 const { Executejava } = require('./Executejava');
 const Chats = require('./Model/Schema');
 
-const PORT = process.env.PORT 
+const PORT =3000
 
 const app = express();
 
@@ -40,7 +40,7 @@ app.use(express.json());
 // console.log("mongoose is connected")
 
 const connectDb = async()=>{
-    await mongoose.connect(process.env.MONGO_URL);
+    await mongoose.connect(`mongodb+srv://laxmiray013:3yxARaz2KZWkS92M@cluster0.4ltnxpb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`);
     console.log(`this db is connected with ${mongoose.connection.host}`)
   }
   
