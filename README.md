@@ -14,10 +14,9 @@
 
 ## Technologies Used
 
-- **Frontend**: React, Socket.IO-client .Tailwind CSS
+- **Frontend**: React, Socket.io .Tailwind CSS
 - **Backend**: Node.js, Express, Socket.IO
 - **Database**: MongoDB
-- **Others**: WebSockets for real-time communication, Docker for containerization (optional)
 
 ### Installation
 
