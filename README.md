@@ -7,6 +7,7 @@
 
 - **Real-time Code Collaboration**: Multiple users can edit code simultaneously with changes reflected instantly.
 - **Integrated Chat**: Chat functionality to discuss code changes, share ideas, and collaborate effectively.
+- **Code Synchronization**: Ensure all users have the latest code updates in real-time.
 - **Multi-language Support**: Supports multiple programming languages for diverse development needs.
 - **Code Execution**: Run code snippets in various languages and get instant feedback.
 - **Persistent Chat History**: Chat messages are stored and retrievable for future reference.
