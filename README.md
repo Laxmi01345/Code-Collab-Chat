@@ -1,8 +1,5 @@
-Sure! Here’s the updated README with instructions for deploying the application on Render.
-
----
-
 # Collab-Code-Chat
+---
 
 **Collab-Code-Chat** is a collaborative code editor that allows developers to work together in real-time with an integrated chat feature. This tool is designed to enhance team productivity by providing seamless code sharing and communication in one platform.
 
