@@ -16,7 +16,8 @@ const Colab = async (navigate,socketRef) => {
   };
 
   try {
-    const socket = io('http://localhost:3000', options);
+    // eslint-disable-next-line no-undef
+    const socket = io(process.env.REACT_APP_SOCKET_URL, options);
 
     // Return a promise that resolves when the socket connects
     return new Promise((resolve, reject) => {
