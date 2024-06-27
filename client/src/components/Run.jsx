@@ -16,7 +16,7 @@ export const Run = ({ code, language,CustomInput}) => {
 
     
     try {
-      const res = await axios.post('http://localhost:3000/run', { code: code, language: language ,input:CustomInput});
+      const res = await axios.post('https://collaborative-code-editor-0ka2.onrender.com/run', { code: code, language: language ,input:CustomInput});
       setProcessing(true);
       if (res.status === 200) {
        
