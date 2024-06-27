@@ -11,7 +11,7 @@ export const Output = ({ editorRef, language }) => {
     console.log(processing)
     return (
         <>
-            <div className='text-xl w-96  relative'>
+            <div className='text-xl w-80 md:w-96  relative'>
                 <span>Output</span>
                 <div className="relative">
                     {processing && <div className="absolute inset-0 flex justify-center items-center bg-opacity-75 bg-black">
