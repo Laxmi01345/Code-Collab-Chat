@@ -120,7 +120,7 @@ const MainPage = () => {
           <SideBar setClient={setClient} Clients={Clients} />
         </div>
         <div className=" flex-1 flex-col">
-          <div className="md:border-b-2 flex justify-between md:h-20 bg-gray-200 md:p-1 ">
+          <div className="md:border-b-2 flex md:h-20 bg-gray-200 md:p-1 ">
             <LangDropdown language={language} onSelectChange={onSelectChange} />
             <Run
               code={code}
