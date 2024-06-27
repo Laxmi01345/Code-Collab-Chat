@@ -129,7 +129,7 @@ const MainPage = () => {
             />
           </div>
           <div className="m-2 md:flex-1 md:flex">
-            <div className="md:w-2/3 md:mr-2 w-96">
+            <div className="md:w-3/3 md:mr-2 w-96">
               <CodeEditor code={code} setCode={setCode} language={language} editorRef={editorRef} socketRef={socketRef} />
             </div>
             <div className="w-1/3">
