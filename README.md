@@ -1,7 +1,7 @@
-# Collab-Code-Chat
+# Code-Collab-Chat
 ---
 
-**Collab-Code-Chat** is a collaborative code editor that allows developers to work together in real-time with an integrated chat feature. This tool is designed to enhance team productivity by providing seamless code sharing and communication in one platform.
+**Code-Collab-Chat** is a collaborative code editor that allows developers to work together in real-time with an integrated chat feature. This tool is designed to enhance team productivity by providing seamless code sharing and communication in one platform.
 
 ## Features
 
