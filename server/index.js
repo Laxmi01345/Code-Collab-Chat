@@ -15,6 +15,9 @@ const { Run } = require('./Run');
 const { Executec } = require('./Executec');
 const { Executejava } = require('./Executejava');
 const Chats = require('./Model/Schema');
+const { GoogleGenerativeAI } = require("@google/generative-ai");
+const { Configuration, OpenAIApi } = require('openai');
+const Anthropic = require('@anthropic-ai/sdk');
 
 const PORT =3000
 
@@ -222,6 +225,15 @@ io.on('connection',async (socket) => {
 
     
 
+    socket.on("cursor-move", ({ RoomId, position }) => {
+        socket.to(RoomId).emit("cursor-move", {
+            userId: socket.id,
+            position,
+            username: userSocketMap[socket.id]
+        });
+    });
+
+    
 });
 
 
@@ -229,3 +241,37 @@ io.on('connection',async (socket) => {
 server.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`);
 });
+
+
+// Initialize Gemini API with the public key
+// Initialize Gemini API
+const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GEMINI_API_KEY);
+
+app.post("/api/chat", async (req, res) => {
+    if (!process.env.NEXT_PUBLIC_GEMINI_API_KEY) {
+        return res.status(500).json({
+            error: 'Gemini API key not configured'
+        });
+    }
+
+    try {
+        const model = genAI.getGenerativeModel({ 
+            model: "gemini-1.5-flash",
+        });
+        
+        const { message } = req.body;
+        const result = await model.generateContent(message);
+        const response = await result.response;
+        const text = response.text();
+        
+        res.json({ response: text });
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ 
+            error: 'Failed to process request',
+            details: error.message 
+        });
+    }
+});
+
+

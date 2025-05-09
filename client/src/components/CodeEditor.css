@@ -1,0 +1,27 @@
+[class*="cursor-"]::before {
+    content: "";
+    position: absolute;
+    width: 2px;
+    height: 18px;
+    background: #007acc;
+    animation: blink 1s infinite;
+}
+
+[class*="cursor-"]::after {
+    content: attr(data-username);
+    position: absolute;
+    top: -20px;
+    left: 0;
+    background: #007acc;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
