@@ -11,6 +11,7 @@ import { ChatOpenProvider } from "./components/ChatOpenContext"
 import { NotificationProvider } from "./components/NotificationContext"
 import { SocketProvider } from "./components/Socketcontext"
 import {CodeRefProvider}  from "./components/CodeRefContext"
+import { io } from 'socket.io-client';
 
 function App() {
   

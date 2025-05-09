@@ -81,8 +81,25 @@ app.post("/run", async (req, res) => {
 });
 
 const server = http.createServer(app);
-const io = new Server(server)
+// Update CORS configuration
+app.use(cors({
+    origin: process.env.NODE_ENV === 'production' 
+        ? 'https://collaborative-code-editor-0ka2.onrender.com'
+        : 'http://localhost:5173',
+    methods: ['GET', 'POST'],
+    credentials: true
+}));
 
+// Update Socket.IO server configuration
+const io = new Server(server, {
+    cors: {
+        origin: process.env.NODE_ENV === 'production' 
+            ? 'https://collaborative-code-editor-0ka2.onrender.com'
+            : 'http://localhost:5173',
+        methods: ['GET', 'POST'],
+        credentials: true
+    }
+});
 const userSocketMap = new Set();
 
 
