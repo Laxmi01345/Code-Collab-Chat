@@ -1,31 +1,27 @@
-import { createContext, useContext } from 'react';
-import { io } from 'socket.io-client';
+import React, { createContext, useRef, useContext } from 'react';
 
-const SOCKET_URL = import.meta.env.PROD 
-    ? 'https://collaborative-code-editor-0ka2.onrender.com' 
-    : 'http://localhost:3000';
-
-const socket = io(SOCKET_URL, {
-    withCredentials: true,
-    transports: ['websocket', 'polling']
-});
+// Provide a socketRef object so consumers can use `socketRef.current`.
+// The actual socket connection is created elsewhere (e.g. in MainPage via Colab)
+// and assigned to `socketRef.current`. This matches the rest of the codebase
+// which expects `const { socketRef } = useContext(SocketContext)`.
 
 const SocketContext = createContext();
 
 export const SocketProvider = ({ children }) => {
+    const socketRef = useRef(null);
     return (
-        <SocketContext.Provider value={socket}>
+        <SocketContext.Provider value={{ socketRef }}>
             {children}
         </SocketContext.Provider>
     );
 };
 
 export const useSocket = () => {
-    const socket = useContext(SocketContext);
-    if (!socket) {
+    const ctx = useContext(SocketContext);
+    if (!ctx) {
         throw new Error('useSocket must be used within a SocketProvider');
     }
-    return socket;
+    return ctx;
 };
 
 export default SocketContext;
